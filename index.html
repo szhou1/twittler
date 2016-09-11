@@ -7,17 +7,14 @@
   </head>
   <body>
     <ul id = "userslist">
-      <li><a href="">Home</a></li>
+      <li><a href="#" id="homelink">Home</a></li>
     </ul>
     <p id = 'tweetslist'></p>
 
     <script>
       var intervalPaused = false;
       $(document).ready(function(){
-        // $("time.timeago").timeago();
-        // alert("hi");
         var $users = $('#userslist');
-        // $users.html('');
         var users = Object.keys(streams.users);
         users.forEach(function(username){
           var $userItem = $('<li></li>');
@@ -28,6 +25,9 @@
           $userItem.appendTo($users);
         });
 
+        // set home link
+        var $homeLink = $('#homelink');
+        $homeLink.on("click", function(){goHome()});
 
         setInterval(function(){
           if(intervalPaused==false){
@@ -58,6 +58,10 @@
           $tweet.text(tweet.created_at + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($tweetslist);
         });
+      };
+
+      var goHome = function(){
+        intervalPaused = false;
       };
 
 
